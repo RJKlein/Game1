@@ -20,8 +20,8 @@ function preload() {
 
     game.load.image('sky', 'assets/IMG_0027.jpg');
     game.load.image('ground', 'assets/Gantry2.png');
+    game.load.image('ground2', 'assets/mars.png');
     game.load.image('tank', 'assets/oxygen.png');
-    game.load.image('grave', 'assets/grave.png');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 
 }
@@ -30,7 +30,7 @@ var player;
 var platforms;
 var cursors;
 var tanks;
-var score = 200;
+var score = 400;
 var finalTime;
 var jumpedonce = false;
 var scoreText;
@@ -51,7 +51,7 @@ function create() {
     platforms.enableBody = true;
 
     // Here we create the ground.
-    var ground = platforms.create(0, game.world.height - 64, 'ground');
+    var ground = platforms.create(0, game.world.height - 64, 'ground2');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     ground.scale.setTo(2, 2);
@@ -126,9 +126,6 @@ function update() {
 	// Checks to see if out of air and ends when 0 or less
 	if (score <= 0) 
 	{
-		
-		ledge = platforms.create(32, game.world.height - 112, 'grave');
-		ledge.body.immovable = true;
 
 		player.kill();
 		
@@ -137,9 +134,10 @@ function update() {
         stateText.visible = true;
 		timeText.visible = false;
 	
-
+/* to-do when states are implemented then utilize restart
         //the "click to restart" handler
-        game.input.onTap.addOnce(restart,this);
+        //game.input.onTap.addOnce(restart,this);
+*/
 	}
 	
 	// Checks to see if we are still alive and randomly creates a tank
@@ -225,7 +223,7 @@ function restart () {
 
     //  A new level starts
     
-    score = 200;
+    score = 400; 
     //revives the player
     player.revive();
     //hides the text
